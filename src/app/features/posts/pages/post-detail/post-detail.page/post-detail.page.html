@@ -1,0 +1,26 @@
+<div class="container">
+
+    <div class="state" *ngIf="loading">
+        <mat-progress-spinner
+        mode="indeterminate"
+        diameter="48"
+        aria-label="Carregando conteúdo">
+      </mat-progress-spinner>
+      <p>Carregando post...</p>
+    </div>
+  
+    <mat-card *ngIf="!loading && post">
+      ...
+    </mat-card>
+
+    <app-comment-list
+    *ngIf="!loading && post"
+    [postId]="post.id">
+  </app-comment-list>
+  
+    <div class="state" *ngIf="!loading && !post">
+      <p>Post não encontrado 😕</p>
+    </div>
+  
+  </div>
+  

@@ -1,0 +1,28 @@
+<div class="feed-container">
+
+  <div class="state" *ngIf="loading()">
+    <mat-progress-spinner></mat-progress-spinner>
+  </div>
+  
+    <!-- ERROR -->
+    <div class="state error" *ngIf="!loading && error">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- EMPTY -->
+    <div class="state" *ngIf="!loading && !error && pagedPosts.length === 0">
+      Nenhum post encontrado 📭
+    </div>
+  
+    <div class="feed" *ngIf="!loading() && pagedPosts().length > 0">
+      <app-post-card *ngFor="let post of pagedPosts()" [post]="post"></app-post-card>
+  
+      <mat-paginator
+        [length]="posts.length"
+        [pageSize]="pageSize"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+  
+  </div>
+  
