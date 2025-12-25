@@ -34,19 +34,16 @@ export class PostListPage implements OnInit {
 
   ngOnInit(): void {
     this.loading.set(true);
-
-    this.postsService.loadPosts().subscribe({
-      next: (posts) => {
-        this.posts.set(posts);
-        this.updatePagedPosts();
-        this.loading.set(false);
-      },
-      error: () => {
-        this.error.set('Erro ao carregar');
-        this.loading.set(false);
-      }
+  
+    this.postsService.posts$.subscribe(posts => {
+      this.posts.set(posts);
+      this.updatePagedPosts();
+      this.loading.set(false);
     });
+  
+    this.postsService.loadPosts().subscribe();
   }
+  
 
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
@@ -54,6 +51,12 @@ export class PostListPage implements OnInit {
   }
 
   private updatePagedPosts(): void {
+    const totalPages = Math.ceil(this.posts().length / this.pageSize);
+  
+    if (this.pageIndex >= totalPages && totalPages > 0) {
+      this.pageIndex = totalPages - 1;
+    }
+  
     const start = this.pageIndex * this.pageSize;
     const end = start + this.pageSize;
     this.pagedPosts.set(this.posts().slice(start, end));

@@ -18,10 +18,10 @@
       <app-post-card *ngFor="let post of pagedPosts()" [post]="post"></app-post-card>
   
       <mat-paginator
-        [length]="posts.length"
-        [pageSize]="pageSize"
-        (page)="onPageChange($event)">
-      </mat-paginator>
+  [length]="posts().length"
+  [pageSize]="pageSize"
+  (page)="onPageChange($event)">
+</mat-paginator>
     </div>
   
   </div>

@@ -1,1 +1,7 @@
-<p>comment-list works!</p>
+<div class="comments" *ngIf="comments$ | async as comments">
+    <div class="comment" *ngFor="let c of comments">
+      <strong>{{ c.email }}</strong>
+      <p>{{ c.body }}</p>
+    </div>
+  </div>
+  

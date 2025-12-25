@@ -1,34 +1,30 @@
 <mat-card class="post-card">
-  <mat-card-header>
-    <mat-card-title>{{ post.title }}</mat-card-title>
 
-    <button
-      mat-icon-button
-      [matMenuTriggerFor]="menu"
-      aria-label="Ações"
-      class="menu-button">
+
+  <div class="post-header">
+    <h3 class="post-title">{{ post.title }}</h3>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
-  </mat-card-header>
 
-  <mat-card-content>
-    <p>{{ post.body }}</p>
-  </mat-card-content>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="editPost()">Editar</button>
+      <button mat-menu-item (click)="deletePost()">Excluir</button>
+    </mat-menu>
+  </div>
 
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="create.emit()">
-      <mat-icon>add</mat-icon>
-      Criar
-    </button>
+  <p>{{ post.body }}</p>
 
-    <button mat-menu-item (click)="edit.emit(post)">
-      <mat-icon>edit</mat-icon>
-      Editar
-    </button>
+  
+  <app-comment-form
+  [postId]="post.id"
+  (created)="reloadComments()">
+</app-comment-form>
 
-    <button mat-menu-item (click)="delete.emit(post.id)">
-      <mat-icon>delete</mat-icon>
-      Excluir
-    </button>
-  </mat-menu>
+<app-comment-list
+  [postId]="post.id"
+  #commentList>
+</app-comment-list>
+
 </mat-card>

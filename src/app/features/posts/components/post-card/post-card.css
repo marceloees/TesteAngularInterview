@@ -1,7 +1,26 @@
 .post-card {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
+  width: 100%;
+  max-width: 500px;   /* tamanho estilo Instagram */
+  margin: 16px auto;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.post-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+
+
+.post-title {
+  font-weight: 600;   /* negrito elegante */
+  font-size: 15px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
   
   mat-card-content {
     font-size: 0.95rem;

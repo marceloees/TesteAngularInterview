@@ -1,1 +1,15 @@
-<p>comment-form works!</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <textarea
+    rows="6"
+    placeholder="Adicione um comentário..."
+  ></textarea>
+
+  <button
+    mat-icon-button
+    color="primary"
+    aria-label="Enviar comentário"
+    (click)="submit()">
+    <mat-icon>send</mat-icon>
+  </button>
+  </form>

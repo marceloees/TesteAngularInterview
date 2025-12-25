@@ -54,7 +54,6 @@ export class PostDetailPage implements OnInit {
       .getPostById(id)
       .pipe(
         finalize(() => {
-          console.log('FINALIZE EXECUTADO');
           this.loading = false;
         })
       )

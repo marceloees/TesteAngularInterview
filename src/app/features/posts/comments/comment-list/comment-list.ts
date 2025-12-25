@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommentsService } from '../../services/comments.service';
 import { CommentsPost } from '../../../../shared/models/post.model/comments-post.model';
+import { Observable } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -16,25 +17,14 @@ import { CommentsPost } from '../../../../shared/models/post.model/comments-post
   ]
 })
 export class CommentListComponent implements OnInit {
-  @Input({ required: true })
-  postId!: number;
 
-  comments: CommentsPost[] = [];
-  loading = true;
-  error: string | null = null;
+  @Input({ required: true }) postId!: number;
+
+  comments$!: Observable<CommentsPost[]>;
 
   constructor(private commentsService: CommentsService) {}
 
   ngOnInit(): void {
-    this.commentsService.getByPost(this.postId).subscribe({
-      next: comments => {
-        this.comments = comments;
-        this.loading = false;
-      },
-      error: () => {
-        this.error = 'Erro ao carregar comentários';
-        this.loading = false;
-      }
-    });
+    this.comments$ = this.commentsService.getByPostId(this.postId);
   }
 }
